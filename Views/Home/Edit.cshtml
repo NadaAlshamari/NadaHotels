@@ -1,0 +1,76 @@
+﻿@model Hotel
+
+@{
+}
+
+
+<div class="container"> 
+    <div class=" alert alert-danger"> Edit </div>
+<form asp-controller="Home" asp-action="Update" method="post">
+    <input type="hidden" asp-for="@Model.Id" />
+    <div class="row">
+        <div class="col">
+            <label for="Name" class="p-2">The Hotel Name</label>
+            <input type="text" id="Name" name="Name" class="form-control form-control-sm" asp-for="@Model.Name" />
+                <span class="text-danger" asp-validation-for="@Model.Name"> </span>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="Address" class="p-2">The Hotel Address </label>
+                <input type="text" id="Address" name="Address" class="form-control form-control-sm" asp-for="@Model.Address" />
+                <span class="text-danger" asp-validation-for="@Model.Address"> </span>
+
+            </div>
+        <div class="col-sm-6">
+            <label for="City" class="p-2">The Hotel City </label>
+                <input type="text" id="City" name="City" class="form-control form-control-sm" asp-for="@Model.City" />
+                <span class="text-danger" asp-validation-for="@Model.City"> </span>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="Email" class="p-2">Email </label>
+                <input type="text" id="Email" name="Email" class="form-control form-control-sm" asp-for="@Model.Email" />
+                <span class="text-danger" asp-validation-for="@Model.Email"> </span>
+
+            </div>
+
+
+        <div class="col-sm-6">
+            <label for="Phone" class="p-2">Phone </label>
+                <input type="text" id="Phone" name="Phone" class="form-control form-control-sm" asp-for="@Model.Phone" />
+                <span class="text-danger" asp-validation-for="@Model.Phone"> </span>
+
+            </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <label for="Images" class="p-2">The Hotel Image </label>
+                <input type="text" id="Images" name="Images" class="form-control form-control-sm" asp-for="@Model.Images" />
+                <span class="text-danger" asp-validation-for="@Model.Images"> </span>
+
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col text-center">
+            <button class="btn btn-success" type="submit">Save</button>
+        </div>
+    </div>
+
+
+</form>
+   
+</div>
+
+
