@@ -1,0 +1,52 @@
+﻿@model Rooms
+
+<div class="container">
+    <div class="alert alert-danger">Edit</div>
+    <form asp-action="UpdateRooms" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col">
+                <label asp-for="IdHotel" class="p-2">اختر الفندق</label>
+                <select class="form-control form-control-sm" asp-for="IdHotel">
+                    <option value="0"></option>
+                    @foreach (var item in ViewBag.hotel)
+                    {
+                        <option value="@item.Id" selected="@item.Id == Model.IdHotel">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="Type" class="p-2">نوع الغرفة  </label>
+                <input type="text" id="Type" name="Type" class="form-control form-control-sm" asp-for="Type" />
+                <span class="text-danger" asp-validation-for="Type"></span>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <label for="Price" class="p-2">السعر   </label>
+                <input type="text" id="Price" name="Price" class="form-control form-control-sm" asp-for="Price" />
+                <span class="text-danger" asp-validation-for="Price"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="Images" class="p-2">الصورة </label>
+                <input type="text" id="Images" name="Images" class="form-control form-control-sm" asp-for="Images" />
+                <span class="text-danger" asp-validation-for="Images"></span>
+            </div>
+        </div>
+
+        
+        <div class="row mt-3">
+            <div class="col text-center">
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

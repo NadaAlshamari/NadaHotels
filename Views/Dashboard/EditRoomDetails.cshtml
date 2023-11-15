@@ -1,0 +1,72 @@
+﻿@model RoomDetails
+
+<div class="container">
+    <div class="alert alert-danger">Edit</div>
+    <form asp-action="UpdateRoomDetails" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col">
+                <label asp-for="IdHotel" class="p-2">اختر الفندق</label>
+                <select class="form-control form-control-sm" asp-for="IdHotel">
+                    <option value="0"></option>
+                    @foreach (var item in ViewBag.hotel)
+                    {
+                        <option value="@item.Id" selected="@item.Id == Model.IdHotel">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label asp-for="IdRooms" class="p-2">اختر الغرفة</label>
+                <select class="form-control form-control-sm" asp-for="IdRooms">
+                    <option value="0"></option>
+                    @foreach (var item in ViewBag.rooms)
+                    {
+                        <option value="@item.Id" selected="@item.Id == Model.IdRooms">@item.Type</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+     
+
+        <div class="row">
+            <div class="col">
+                <label for="Image1" class="p-2">الصورة الأولى</label>
+                <input type="text" id="Images1" name="Image1" class="form-control form-control-sm" asp-for="Image1" />
+                <span class="text-danger" asp-validation-for="Image1"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="Image2" class="p-2">الصورة الثانية</label>
+                <input type="text" id="Image2" name="Image2" class="form-control form-control-sm" asp-for="Image2" />
+                <span class="text-danger" asp-validation-for="Image2"></span>
+            </div>
+            <div class="col-sm-6">
+                <label for="Image3" class="p-2">الصورة الثالثة</label>
+                <input type="text" id="Image3" name="Image3" class="form-control form-control-sm" asp-for="Image3" />
+                <span class="text-danger" asp-validation-for="Image3"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <label asp-for="Features" class="p-2">المميزات</label>
+                <textarea id="Features" name="Features" class="form-control form-control-sm" asp-for="Features"></textarea>
+                <span asp-validation-for="Features" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col text-center">
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+

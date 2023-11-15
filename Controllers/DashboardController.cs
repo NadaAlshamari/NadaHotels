@@ -3,6 +3,9 @@ using Hotels.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
+using MimeKit;
+using MailKit.Net.Smtp;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hotels.Controllers
 {
@@ -14,6 +17,34 @@ namespace Hotels.Controllers
         {
             _context = context;
         }
+
+        public async Task<string> SendEmail()
+        {
+            var Message = new MimeMessage();
+            Message.From.Add(new MailboxAddress("Text Message", "lmattractive24@gmail.com"));
+            Message.To.Add(MailboxAddress.Parse("ispoilt24@gmail.com"));
+            Message.Subject = "Test Email From My project in Asp.net Core MVC";
+            Message.Body = new TextPart("Plain")
+            {
+                Text = "Welcome in my App"   
+            };
+            using (var client=new SmtpClient())
+            {
+                try
+                {
+                    client.Connect("smtp.gmail.com", 587);
+                    client.Authenticate("lmattractive24@gmail.com", "xzybdfqfppamvzes");
+                    await client.SendAsync(Message);
+                    client.Disconnect(true);
+                }
+                catch (Exception e){ 
+                    return e.Message.ToString();
+                
+                }   
+            }
+            return "Ok";
+        }
+
 
         [HttpPost]
         public IActionResult Index(string city)
@@ -70,6 +101,27 @@ namespace Hotels.Controllers
             return RedirectToAction("Rooms");
         }
 
+        public IActionResult UpdateRooms(Rooms rooms)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.rooms.Attach(rooms);
+                _context.Entry(rooms).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Rooms");
+            }
+            return View("EditRooms");
+        }
+
+
+
+        public IActionResult EditRooms(int Id)
+        {
+            var EditRooms = _context.rooms.SingleOrDefault(x => x.Id == Id);
+            ViewBag.hotel = _context.hotel.ToList();
+            return View(EditRooms);
+        }
+
 
 
         public IActionResult RoomDetails()
@@ -103,8 +155,30 @@ namespace Hotels.Controllers
 				TempData["Del"] = "Ok";
 			}
 			return RedirectToAction("RoomDetails");
+
 		}
 
+        public IActionResult UpdateRoomDetails(RoomDetails roomDetails)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.roomDetails.Attach(roomDetails);
+                _context.Entry(roomDetails).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("RoomDetails");
+            }
+            return View("EditRoomDetails");
+        }
+
+
+
+        public IActionResult EditRoomDetails(int Id)
+        {
+            var RoomDetailsEdit = _context.roomDetails.SingleOrDefault(x => x.Id == Id);
+            ViewBag.hotel = _context.hotel.ToList();
+            ViewBag.rooms = _context.rooms.ToList();
+            return View(RoomDetailsEdit);
+        }
 
 
         public IActionResult Update(Hotel hotel)
@@ -150,5 +224,10 @@ namespace Hotels.Controllers
 			var hotel = _context.hotel.ToList();
             return View("Index",hotel);
         }
+
+
+        
     }
 }
+
+//xzyb dfqf ppam vzes
