@@ -105,8 +105,8 @@ namespace Hotels.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.rooms.Attach(rooms);
-                _context.Entry(rooms).State = EntityState.Modified;
+                _context.rooms.Update(rooms);
+            //    _context.Entry(rooms).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Rooms");
             }
@@ -162,8 +162,8 @@ namespace Hotels.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.roomDetails.Attach(roomDetails);
-                _context.Entry(roomDetails).State = EntityState.Modified;
+                _context.roomDetails.Update(roomDetails);
+              //  _context.Entry(roomDetails).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("RoomDetails");
             }
